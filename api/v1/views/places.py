@@ -27,12 +27,12 @@ def place_city(city_id=None):
 
     if request.method == 'POST':
         if not request.json:
-            abort(400, "Not a JSON")
+            return jsonify({'error': 'Not a JSON'}), 400
         if 'user_id' not in request.json:
-            abort(400, "Missing user_id")
+            return jsonify({'error': 'Missing user_id'}), 400
 
         if 'name' not in request.json:
-            abort(400, "Missing name")
+            return jsonify({'error': 'Missing name'}), 400
 
         mydict = request.get_json()
 
@@ -74,7 +74,7 @@ def place(place_id=None):
 
     if request.method == 'PUT':
         if not request.json:
-            abort(400, "Not a JSON")
+            return jsonify({'error': 'Not a JSON'}), 400
 
         mydict = request.get_json()
 
