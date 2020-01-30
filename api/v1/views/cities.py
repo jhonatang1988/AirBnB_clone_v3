@@ -16,19 +16,17 @@ def city_state(state_id=None):
     """ cities api"""
     apimethod = ApiMethod()
     if request.method == 'GET':
-        if not state_id:
-            abort(400)
         mylist = apimethod.get_object_byid("State", state_id)
         if mylist:
-            return make_response(jsonify(mylist), 200)
+            return jsonify(mylist)
         else:
             abort(404)
 
     if request.method == 'POST':
         if not request.json:
-            abort(400, "Not a JSON")
+            return jsonify({'error': 'Not a JSON'}), 400
         if 'name' not in request.json:
-            abort(400, "Missing name")
+            return jsonify({'error': 'Missing name'}), 400
 
         mydict = request.get_json()
         myobj = storage.get('State', state_id)
