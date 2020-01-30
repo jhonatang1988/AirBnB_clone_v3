@@ -21,6 +21,7 @@ def not_found(error):
     """close"""
     return make_response(jsonify({'error': 'Not found'}), 404)
 
+
 @app.teardown_appcontext
 def teardown_appcontext(self):
     """close"""
