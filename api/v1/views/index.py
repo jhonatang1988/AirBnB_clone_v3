@@ -23,9 +23,8 @@ classes = {"amenities": Amenity,
 @app_views.route("/status")
 def status():
     """status ok"""
-    return jsonify({
-        "status": "0K"
-    })
+
+    return jsonify({"status": "OK"})
 
 
 @app_views.route("/stats")
