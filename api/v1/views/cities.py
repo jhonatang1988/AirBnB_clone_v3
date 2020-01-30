@@ -44,8 +44,6 @@ def city(city_id=None):
     """ cities api"""
     apimethod = ApiMethod()
     if request.method == 'GET':
-        if not city_id:
-            abort(400)
         mydict = apimethod.get_one_object("City", city_id)
         if not mydict:
             abort(404)
@@ -63,7 +61,7 @@ def city(city_id=None):
 
     if request.method == 'PUT':
         if not request.json:
-            abort(400, "Not a JSON")
+            return jsonify({'error': 'Not a JSON'}), 400
 
         mydict = request.get_json()
 
@@ -71,6 +69,10 @@ def city(city_id=None):
         for key in list:
             if key in mydict.keys():
                 mydict.pop(key)
+
+        if not mydict:
+            return jsonify({'error': 'Not a JSON'}), 400
+
         updObjDict = apimethod.update_objects("City", city_id, **mydict)
         if updObjDict:
 
