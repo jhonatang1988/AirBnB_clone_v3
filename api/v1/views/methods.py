@@ -51,7 +51,7 @@ class ApiMethod:
         if obj:
             for key, value in kwargs.items():
                 setattr(obj, key, value)
-            storage.save()
+            obj.save()
             return obj.to_dict()
         else:
             return None
