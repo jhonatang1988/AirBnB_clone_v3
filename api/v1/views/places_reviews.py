@@ -26,11 +26,11 @@ def review_place(place_id=None):
 
     if request.method == 'POST':
         if not request.json:
-            abort(400, "Not a JSON")
+            return jsonify({'error': 'Not a JSON'}), 400
         if 'user_id' not in request.json:
-            abort(400, "Missing user_id")
+            return jsonify({'error': 'Missing user_id'}), 400
         if 'text' not in request.json:
-            abort(400, "Missing text")
+            return jsonify({'error': 'Missing text'}), 400
         mydict = request.get_json()
         myuser = storage.get('User', mydict['user_id'])
         if not myuser:
@@ -69,7 +69,7 @@ def review(review_id=None):
 
     if request.method == 'PUT':
         if not request.json:
-            abort(400, "Not a JSON")
+            return jsonify({'error': 'Not a JSON'}), 400
 
         mydict = request.get_json()
 
