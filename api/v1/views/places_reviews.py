@@ -16,11 +16,9 @@ def review_place(place_id=None):
     """ place api"""
     apimethod = ApiMethod()
     if request.method == 'GET':
-        if not place_id:
-            abort(400)
         mylist = apimethod.get_object_byid("Place", place_id)
         if mylist:
-            return make_response(jsonify(mylist), 200)
+            return jsonify(mylist), 200
         else:
             abort(404)
 
@@ -41,7 +39,7 @@ def review_place(place_id=None):
             newObjDict = apimethod.create_object(City, **mydict)
         else:
             abort(404)
-        return make_response(jsonify(newObjDict), 201)
+        return jsonify(newObjDict), 201
 
 
 @app_views.route("/reviews/<review_id>",
@@ -50,22 +48,17 @@ def review(review_id=None):
     """ review api"""
     apimethod = ApiMethod()
     if request.method == 'GET':
-        if not review_id:
-            abort(400)
         mydict = apimethod.get_one_object("Review", review_id)
         if not mydict:
             abort(404)
         else:
             return make_response(jsonify(mydict), 200)
     if request.method == 'DELETE':
-        if review_id:
-            deleteObj = apimethod.delete_one_object("Review", review_id)
-            if not deleteObj:
-                abort(404)
-            else:
-                return make_response(jsonify({}, 200))
+        deleteObj = apimethod.delete_one_object("Review", review_id)
+        if not deleteObj:
+            abort(404)
         else:
-            abort(400)
+            return jsonify({}), 200
 
     if request.method == 'PUT':
         if not request.json:
@@ -80,6 +73,6 @@ def review(review_id=None):
         updObjDict = apimethod.update_objects("Review", review_id, **mydict)
         if updObjDict:
 
-            return make_response(jsonify(updObjDict), 200)
+            return jsonify(updObjDict), 200
         else:
             abort(404)
