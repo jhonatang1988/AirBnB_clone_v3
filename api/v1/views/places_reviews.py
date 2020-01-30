@@ -16,7 +16,7 @@ def review_place(place_id=None):
     """ place api"""
     apimethod = ApiMethod()
     if request.method == 'GET':
-        mylist = apimethod.get_object_byid("Place", place_id)
+        mylist = apimethod.get_object_byid("Place", place_id, 'reviews')
         if mylist:
             return jsonify(mylist), 200
         else:

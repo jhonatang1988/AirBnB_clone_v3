@@ -16,7 +16,7 @@ def city_state(state_id=None):
     """ cities api"""
     apimethod = ApiMethod()
     if request.method == 'GET':
-        mylist = apimethod.get_object_byid("State", state_id)
+        mylist = apimethod.get_object_byid("State", state_id, 'cities')
         if mylist:
             return jsonify(mylist)
         else:

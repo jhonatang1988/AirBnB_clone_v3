@@ -56,19 +56,13 @@ class ApiMethod:
         else:
             return None
 
-    def get_object_byid(self, cls, obj_id):
+    def get_object_byid(self, cls, obj_id, attribute):
         """ retrieve ojects associated to another Object. ej: an state
         has many cities """
-        clss = {'cities': 'State', 'amenities': 'Place', 'places': 'City',
-                'reviews': 'Place'}
         myobj = storage.get(cls, obj_id)
         if not myobj:
             return None
         mylist = []
-        att = ''
-        for k, v in clss.items():
-            if cls == v:
-                att = k
-        for obj in getattr(myobj, att):
+        for obj in getattr(myobj, attribute):
             mylist.append(obj.to_dict())
         return mylist
