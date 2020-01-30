@@ -19,7 +19,7 @@ def amenity_place(place_id=None):
         apimethod = ApiMethod()
         if not place_id:
             abort(400)
-        mylist = apimethod.get_object_byid("Place", place_id)
+        mylist = apimethod.get_object_byid("Place", place_id, 'amenities')
         if mylist:
             return make_response(jsonify(mylist), 200)
         else:
