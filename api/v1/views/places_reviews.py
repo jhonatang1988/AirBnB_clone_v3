@@ -17,10 +17,7 @@ def review_place(place_id=None):
     apimethod = ApiMethod()
     if request.method == 'GET':
         mylist = apimethod.get_object_byid("Place", place_id, 'reviews')
-        if mylist:
-            return jsonify(mylist), 200
-        else:
-            abort(404)
+        return jsonify(mylist), 200
 
     if request.method == 'POST':
         if not request.json:

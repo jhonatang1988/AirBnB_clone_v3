@@ -17,13 +17,8 @@ def amenity_place(place_id=None):
     """ amenities api"""
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         apimethod = ApiMethod()
-        if not place_id:
-            abort(400)
         mylist = apimethod.get_object_byid("Place", place_id, 'amenities')
-        if mylist:
-            return make_response(jsonify(mylist), 200)
-        else:
-            abort(404)
+        return make_response(jsonify(mylist), 200)
     else:
         objects = storage.all('Place')
     if 'Place.' + place_id in objects.keys():

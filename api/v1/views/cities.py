@@ -17,10 +17,7 @@ def city_state(state_id=None):
     apimethod = ApiMethod()
     if request.method == 'GET':
         mylist = apimethod.get_object_byid("State", state_id, 'cities')
-        if mylist:
-            return jsonify(mylist)
-        else:
-            abort(404)
+        return jsonify(mylist)
 
     if request.method == 'POST':
         if not request.json:

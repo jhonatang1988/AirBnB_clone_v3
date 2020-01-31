@@ -61,7 +61,7 @@ class ApiMethod:
         has many cities """
         myobj = storage.get(cls, obj_id)
         if not myobj:
-            return None
+            abort(404)
         mylist = []
         for obj in getattr(myobj, attribute):
             mylist.append(obj.to_dict())
