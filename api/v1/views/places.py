@@ -17,13 +17,8 @@ def place_city(city_id=None):
     """ places api"""
     apimethod = ApiMethod()
     if request.method == 'GET':
-        if not city_id:
-            abort(400)
         mylist = apimethod.get_object_byid("City", city_id, 'places')
-        if mylist:
-            return make_response(jsonify(mylist), 200)
-        else:
-            abort(404)
+        return make_response(jsonify(mylist), 200)
 
     if request.method == 'POST':
         if not request.json:
